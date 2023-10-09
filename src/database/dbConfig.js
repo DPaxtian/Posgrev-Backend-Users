@@ -1,7 +1,7 @@
 import Sequelize from 'sequelize';
 
-export const sequelize = new Sequelize('fuberapi', 'uv', 'Okmijn0798', {
-  host: 'mysqluv2023.ddns.net',
+export const sequelize = new Sequelize('pruebaposgres', 'uvposgres', 'root1', {
+  host: 'localhost',
   dialect: 'mysql'
 
 });

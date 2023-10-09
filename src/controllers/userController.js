@@ -4,7 +4,7 @@ export const createUser = async (req, res) =>{
     try {
         const {nombreUsuario, rol, password, identificadorPrograma} = req.body;
 
-        const newUser = await Usuario.create({
+        const newUser = await User.create({
             nombreUsuario,
             rol,
             password,
