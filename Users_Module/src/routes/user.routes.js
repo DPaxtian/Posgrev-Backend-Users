@@ -3,15 +3,15 @@ import {createUser, getUsers, getUser, updateUser, deleteUser} from '../controll
 const router = Router();
 
 //Crear 
-router.post('/user', createUser)
+router.post('/createUser', createUser)
 //Obtener grupal
-router.get('/users', getUsers)
+router.get('/getUsers', getUsers)
 //Obtener individual
-router.get('/user/:ID', getUser);
+router.get('/getUser/:ID', getUser);
 //Actualizar 
-router.put('/user/:ID', updateUser);
+router.put('/updateUser/:ID', updateUser);
 //Eliminar
-router.delete('/user/:ID', deleteUser)
+router.delete('/deleteUser/:ID', deleteUser)
 
 
 export default router;
