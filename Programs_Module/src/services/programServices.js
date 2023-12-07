@@ -16,14 +16,14 @@ const saveProgram = async (newProgram) => {
 
 
 const modifyProgram = async (idProgram, programModified) => {
-    return new Promise ((resolve, reject) => {
-        Program.updateOne({identificadorPrograma: idProgram}, programModified)
-        .then(() => {
-            resolve(200);
-        })
-        .catch(() => {
-            reject(500);
-        })
+    return new Promise((resolve, reject) => {
+        Program.updateOne({ identificadorPrograma: idProgram }, programModified)
+            .then(() => {
+                resolve(200);
+            })
+            .catch(() => {
+                reject(500);
+            })
     });
 }
 
@@ -31,7 +31,7 @@ const modifyProgram = async (idProgram, programModified) => {
 const getAllPrograms = async () => {
     let programsRecovered = [];
     return new Promise((resolve, reject) => {
-        const programsResult = Program.find({activo: "Activo"})
+        const programsResult = Program.find({ activo: "Activo" })
             .then((programsResult) => {
                 programsRecovered = programsResult;
                 resolve(programsRecovered);
@@ -46,21 +46,38 @@ const getAllPrograms = async () => {
 const getProgramDetails = async (idProgram) => {
     let programDetails = {};
     return new Promise((resolve, reject) => {
-        const programRecovered = Program.findOne({identificadorPrograma: idProgram})
-        .then((programRecovered) => {
-            programDetails = programRecovered;
-            resolve(programDetails)
-        })
-        .catch((error) => {
-            reject(500)
-        });
+        const programRecovered = Program.findOne({ identificadorPrograma: idProgram })
+            .then((programRecovered) => {
+                programDetails = programRecovered;
+                resolve(programDetails)
+            })
+            .catch((error) => {
+                reject(500)
+            });
     })
 }
-  
+
+
+const saveGeneralData = async (identifierProgram, generalDataInformation) => {
+    return new Promise((resolve, reject) => {
+        Program.findOneAndUpdate({ identificadorPrograma: identifierProgram }, { $set: { "datosGenerales": generalDataInformation } })
+            .then(() => {
+                resolve(200)
+            })
+            .catch(() => {
+                reject(500);
+            });
+    });
+}
+
+
+
+
 
 module.exports = {
     saveProgram,
     modifyProgram,
     getAllPrograms,
-    getProgramDetails
+    getProgramDetails,
+    saveGeneralData
 }

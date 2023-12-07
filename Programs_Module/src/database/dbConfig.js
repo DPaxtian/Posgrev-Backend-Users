@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const DBURI = 'mongodb://uvposgrev:root1@127.0.0.1:27017/Posgrev?authMechanism=DEFAULT&authSource=Posgrev';
+const DBURI = 'mongodb+srv://uvposgrev:root1@cluster0.fn3jqmo.mongodb.net/Posgrev';
 
 const connect = () => {
     mongoose.connect(DBURI)

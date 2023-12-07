@@ -1,7 +1,13 @@
 const { Router } = require("express");
-const { testEvaluation } = require('../controllers/evaluationController');
+const { getAllEvaluationPeriods, createEvaluationPeriod, addEvaluationPeriodExtension, deleteEvaluationPeriod, getEvaluationPeriodById, editEvaluationPeriod } = require('../controllers/evaluationController');
 const router = Router();
 
-router.get('/testEvaluation', testEvaluation)
+router.get('/getAllEvaluationPeriods', getAllEvaluationPeriods);
+router.post('/createEvaluationPeriod', createEvaluationPeriod);
+router.patch('/addPeriodExtension/:evaluationId', addEvaluationPeriodExtension);
+router.delete('/deleteEvaluationPeriod/:evaluationId', deleteEvaluationPeriod);
+router.get('/getEvaluationPeriodById/:idPeriod', getEvaluationPeriodById);
+router.patch('/editEvaluationPeriod/:idPeriod', editEvaluationPeriod)
+
 
 module.exports = router;

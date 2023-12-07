@@ -94,9 +94,34 @@ const getAllPrograms = async (req, res) => {
 
 }
 
+
+
+const saveGeneralData = async (req, res) => {
+    let resultCode = 500;
+    let response = "An error was ocurred :(";
+
+    try{
+        const identifierProgram = req.params.idProgram;
+        const generalDataInformation = req.body;
+
+        resultCode = await programService.saveGeneralData(identifierProgram, generalDataInformation);
+        if(resultCode == 200){
+            response = "General data updated succesfully"
+        }
+    } catch(error){
+        response = "An error has been ocurred while saving general data"
+    }
+
+    return res.status(resultCode).json({
+        code: resultCode,
+        msg: response
+    });
+}
+
 module.exports = {
     createProgram,
     modifyProgram,
     getProgramDetails,
-    getAllPrograms
+    getAllPrograms,
+    saveGeneralData
 }
