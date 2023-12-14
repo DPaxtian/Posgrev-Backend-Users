@@ -58,7 +58,7 @@ export const updateUser = async (req, res) => {
     const user = await User.findByPk(ID);
     const { rol, nombreUsuario, password, identificadorPrograma } = req.body;
 
-    if (user != null && saldo > 0) {
+    if (user != null ) {
         user.rol = rol;
         user.nombreUsuario = nombreUsuario;
         user.password = password;
@@ -68,7 +68,7 @@ export const updateUser = async (req, res) => {
 
         res.json(user);
     } else {
-        res.json({ error: "Usuario no existe o saldo es invalido" })
+        res.json({ error: "Usuario no existe" })
     }
 }
 
@@ -87,6 +87,30 @@ export const deleteUser = async (req, res) => {
         console.log(error)
     }
 }
+
+export const autenticarUsuario = async (req, res) => {
+    console.log("autenticacion entrante");
+    const { correo, contrasena } = req.params;
+    try {
+        const usuario = await Usuario.findOne({
+            where: {
+                correo,
+            },
+        });
+
+        if (usuario && usuario.contrasena === contrasena) {
+            res.json({
+                usuario,
+            });
+        } else {
+            res.json({ mensaje: "Credenciales incorrectas" });
+        }
+    } catch (error) {
+        console.log(error);
+        res.json({ error: `${error}` });
+    }
+};
+
 
 
 export const sendRecoverEmail = async (req, res) => {
@@ -121,5 +145,7 @@ export const sendRecoverEmail = async (req, res) => {
     } catch (error) {
         console.error("Error", error)
     }
+
+    
 
 }

@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import {createUser, getUsers, getUser, updateUser, deleteUser, sendRecoverEmail} from '../controllers/userController.js'
+import {createUser, getUsers, getUser, updateUser, deleteUser, sendRecoverEmail,autenticarUsuario} from '../controllers/userController.js'
 const router = Router();
 
 //Crear 
@@ -12,8 +12,10 @@ router.get('/getUser/:ID', getUser);
 router.put('/updateUser/:ID', updateUser);
 //Eliminar
 router.delete('/deleteUser/:ID', deleteUser)
-
+//Email de recuperación
 router.post('/sendRecoverEmail/:username', sendRecoverEmail)
+//Autenticaciíon
+router.get('/authenticate/:correo&:contrasena',autenticarUsuario)
 
 
 export default router;
