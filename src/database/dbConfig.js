@@ -1,6 +1,6 @@
 import Sequelize from 'sequelize';
 
-export const sequelize = new Sequelize('uvposgres', 'uvposgres', 'root123', {
+export const sequelize = new Sequelize('pruebaposgres', 'uvposgres', 'root1', {
   host: 'localhost',
   dialect: 'mysql'
 
