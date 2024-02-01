@@ -90,15 +90,17 @@ export const deleteUser = async (req, res) => {
 
 export const autenticarUsuario = async (req, res) => {
     console.log("autenticacion entrante");
-    const { correo, contrasena } = req.params;
+    const { nombreUsuario, password } = req.params;
+
     try {
-        const usuario = await Usuario.findOne({
+        const usuario = await User.findOne({
             where: {
-                correo,
+                nombreUsuario,
+                password,
             },
         });
 
-        if (usuario && usuario.contrasena === contrasena) {
+        if (usuario) {
             res.json({
                 usuario,
             });
@@ -144,8 +146,40 @@ export const sendRecoverEmail = async (req, res) => {
         });
     } catch (error) {
         console.error("Error", error)
+    }   
+
+};
+
+export const getRole = async (req, res) => {
+    try {
+        const { nombreUsuario } = req.params;
+        console.log("Nombre de usuario recibido:", nombreUsuario);
+
+        if (!nombreUsuario) {
+            res.status(400).json({ mensaje: "Nombre de usuario no proporcionado" });
+            return;
+        }
+
+        const user = await User.findOne({
+            where: {
+                nombreUsuario: nombreUsuario,
+            },
+        });
+
+        if (user) {
+            console.log("Rol encontrado:", user.rol);
+            res.json({
+                rol: user.rol,
+            });
+        } else {
+            console.log("Usuario no encontrado");
+            res.json({ mensaje: "Usuario no encontrado" });
+        }
+    } catch (error) {
+        console.log(error);
+        res.json({ error: `${error}` });
     }
+};
 
-    
 
-}
+
