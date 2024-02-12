@@ -53,6 +53,30 @@ export const getUser = async (req, res) => {
     }
 }
 
+
+export const getUserByUsername = async (req, res) => {
+    const { nombreUsuario } = req.params;
+
+    try {
+        const user = await User.findOne({
+            where: {
+                nombreUsuario,
+            }
+        });
+
+        if (user == null) {
+            res.status(204);
+            res.json();
+        } else {
+            res.json(user)
+        }
+
+    } catch (error) {
+        console.log(error);
+        res.json({ error })
+    }
+}
+
 export const updateUser = async (req, res) => {
     const { ID } = req.params;
     const user = await User.findByPk(ID);

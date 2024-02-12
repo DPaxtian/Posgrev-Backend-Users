@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import {createUser, getUsers, getUser, updateUser, deleteUser, sendRecoverEmail,autenticarUsuario, getRole} from '../controllers/userController.js'
+import {createUser, getUsers, getUser, getUserByUsername, updateUser, deleteUser, sendRecoverEmail,autenticarUsuario, getRole} from '../controllers/userController.js'
 const router = Router();
 
 // Crear usuario
@@ -10,6 +10,9 @@ router.get('/getUsers', getUsers);
 
 // Obtener información de un usuario por ID
 router.get('/getUser/:ID', getUser);
+
+// Obtener información de un usuario por nombre de usuario
+router.get('/getUserByUsername/:nombreUsuario', getUserByUsername);
 
 // Actualizar información de un usuario por ID
 router.put('/updateUser/:ID', updateUser);
